@@ -20,3 +20,41 @@ num::time_past:: ~time_past()
     duration = (double)(finish_ - start_) / CLOCKS_PER_SEC;  
     std::cout<< duration<<"seconds used"<<std::endl;   
  }
+num::random_create::random_create(long min,long max,long count,std::string path_set):
+    min_(min),max_(max),count_(count),path_set_(path_set)
+{
+}
+bool num::random_create::create()
+{  std::random_device rd;
+   std::mt19937 gen(rd());
+   std::uniform_int_distribution<> dis(min_, max_);
+   std::ofstream out("out.txt"); 
+   if (out.is_open()) 
+  {
+    for (long i=count_;i>0;i--)
+     {
+        out<< dis(gen)<<std::endl;
+     } 
+   out.close();
+   } 
+  
+else
+  return false; 
+  return true;  
+}
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

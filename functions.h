@@ -3,7 +3,8 @@
 #include<unistd.h>
 #include<iostream>
 #include <ctime>
-
+#include<random>
+#include<fstream>
 #define MAX_PATH 256
 bool GetPathHere(std::string& path_here);
 namespace num
@@ -32,7 +33,29 @@ class time_past:public num::noncopyable
    clock_t start_, finish_;  
    double duration;
    };
+  class random_create:public num::noncopyable
+   {
+    public:
+    random_create():
+    min_(1),max_(1000000000),count_(100),path_set_("out.txt")
+    {
+    }
+  
+    explicit random_create(long min,long max,long count,std::string path_set);
+    bool create();
+    private:
+     std::string path_set_;
+     long min_;
+     long max_;
+     long count_; 
+   };
+  
 }
 #endif
+
+
+
+
+
 
 
