@@ -28,7 +28,7 @@ bool num::random_create::create()
 {  std::random_device rd;
    std::mt19937 gen(rd());
    std::uniform_int_distribution<> dis(min_, max_);
-   std::ofstream out("out.txt"); 
+   std::ofstream out(path_set_); 
    if (out.is_open()) 
   {
     for (long i=count_;i>0;i--)

@@ -1,5 +1,5 @@
-#ifndef NUM_BASE_CREATE_H
-#define NUM_BASE_CREATE_H
+#ifndef NUM_FUNCTIONS_H
+#define NUM_FUNCTIONS_H
 #include<unistd.h>
 #include<iostream>
 #include <ctime>
