@@ -1,0 +1,16 @@
+#CMake 最低版本号要求
+cmake_minimum_required (VERSION 2.8)
+#项目支持c++11
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+# 项目信息
+project (thread_poll_test)
+# 指定生成目标
+add_library(functions functions.cc functions.h)
+add_library(num_sort num_sort.cc  num_sort.h)
+add_library(thread_poll   thread_poll.cc thread_poll.h)
+add_executable(thread_poll_test thread_poll_test.cc thread_poll.h)
+# Create our application that uses our new library
+# Link our executable with the new library
+target_link_libraries(thread_poll_test functions num_sort thread_poll pthread )
+
