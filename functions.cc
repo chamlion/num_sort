@@ -1,6 +1,6 @@
 #include"functions.h"
 
-bool GetPathHere(std::string& path_here)
+bool num::GetPathHere(std::string& path_here)
 {  
     path_here.clear();
     char szWorkDir[MAX_PATH] = {0} ;  
@@ -14,6 +14,22 @@ bool GetPathHere(std::string& path_here)
     path_here.append("/") ;  
     return true ;  
 }  
+void num::get_all_file_name(std::vector<std::string>& vec)
+{
+DIR * dir;
+    struct dirent * ptr;
+    int i;
+dir = opendir("/home/chamlion/Documents/num_solv/data/");
+    while((ptr = readdir(dir)) != NULL)
+    {    if (ptr->d_name[0]!='.')
+        { //std::cout<<ptr->d_name<<std::endl;
+         vec.push_back(ptr->d_name);
+        }
+    }
+
+
+    closedir(dir);
+}
 num::time_past:: ~time_past()
   {
     finish_ = clock();  
@@ -33,7 +49,7 @@ bool num::random_create::create()
   {
     for (long i=count_;i>0;i--)
      {
-        out<< dis(gen)<<std::endl;
+        out<< dis(gen)<<"\n";
      } 
    out.close();
    } 
