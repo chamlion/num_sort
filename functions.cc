@@ -14,12 +14,15 @@ bool num::GetPathHere(std::string& path_here)
     path_here.append("/") ;  
     return true ;  
 }  
-void num::get_all_file_name(std::vector<std::string>& vec)
+void num::get_all_file_name(std::vector<std::string>& vec,std::string file)
 {
-DIR * dir;
+ std::string str_temp;
+ if(num::GetPathHere(str_temp))
+{   str_temp=str_temp+file+"/";
+    DIR * dir;
     struct dirent * ptr;
     int i;
-dir = opendir("/home/chamlion/Documents/num_solv/data/");
+    dir = opendir(str_temp.c_str());
     while((ptr = readdir(dir)) != NULL)
     {    if (ptr->d_name[0]!='.')
         { //std::cout<<ptr->d_name<<std::endl;
@@ -29,6 +32,9 @@ dir = opendir("/home/chamlion/Documents/num_solv/data/");
 
 
     closedir(dir);
+}
+else
+std::cout<<"get path  fail"<<std::endl;
 }
 num::time_past:: ~time_past()
   {
