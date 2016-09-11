@@ -8,6 +8,8 @@
 #include <cstdio> //snprintf
 #include "functions.h"
 #include <stack>
+namespace num
+{
  class take_num_from_file  //从文件中读取数据
 {
 public:
@@ -67,7 +69,8 @@ files_(files)
   
   //priority_queue<long> ques
 };
-void success_tree::create()
+}
+void num::success_tree::create()
 {   
 
     long num;
@@ -82,15 +85,17 @@ for(auto iter=files_.begin();iter != files_.end();iter++)
       node.num_in_file=num_source[i]->num;
       node.file_index=i;
       ques.push(node); 
- //  std::cout<<ques.top().num_in_file<<std::endl;
+   //std::cout<<"i= "<<i<<"  ques .size "<<ques.size()<<" num_source.size"<<num_source.size()<<std::endl;
 //因为这里读取的是所有排序过的文件，所以文件不 为空，
       }
+     else
+     std::cout<<"fail "<<i<<std::endl;
     }
 
 }
 
 
-bool success_tree::sort()  //每一千万行数据保存为一个文件大约一百M左右
+bool num::success_tree::sort()  //每一千万行数据保存为一个文件大约一百M左右
 {
   char out_file_name[20]={0};
   std::ofstream out;
@@ -129,9 +134,11 @@ bool success_tree::sort()  //每一千万行数据保存为一个文件大约一
       ques.push(node);
      }
       else 
-     {
+     { 
+     //  std::cout<<"berore size "<<num_source.size()<<std::endl;
+      // std::cout<<"delete index"<<node.file_index<<std::endl;
        num_source.erase(num_source.begin()+ node.file_index);
-     // std::cout<<"delete  "<<node.file_index<<"  now 剩余"<<num_source.size()<<std::endl;
+      std::cout<<"delete  "<<node.file_index<<"  now 剩余"<<num_source.size()<<std::endl;
        adjust();
      }		
      } 
@@ -144,13 +151,16 @@ bool success_tree::sort()  //每一千万行数据保存为一个文件大约一
     
   } 
 while(!ques.empty())
- {
+ {  
+  // std::cout<<""<<std::endl;
+   std::cout<<"!ques.empty"<<std::endl;
    out<<ques.top().num_in_file<<"\n";
    ques.pop();
  }
 out.close();
 }
-void success_tree::adjust ()  
+
+void num::success_tree::adjust ()  
 //优先级队列不支持遍历 只能通过栈先将里面的数据取出来，
 //处理后在放回去来实现对节点信息的更新。
 //由于每个文件大小为100M 10个G才100个文件左右，其对时间的消耗不大
@@ -168,83 +178,23 @@ void success_tree::adjust ()
          ques.pop();
    }
  while(!sta.empty())
- {
+ {   
      ques.push(sta.top());
+//std::cout<<sta.top().file_index<<std::endl;
      sta.pop();
  }
+
 }
+/*
+*/
 int main ()
 {
 std::vector<std::string> files;
-num:: get_all_file_name(files);
-success_tree tree(files);
+num:: get_all_file_name(files,"data");
+num::success_tree tree(files);
 tree.sort();
 return 0;
 
 }
-
-/*
-bool success_tree::take( )
-{   
-  while(!num_source.empty())  
-  {
-  if(num_source[index]->get_a_num())
-    {  //std::cout<<index<<"\n";
-      num_from_file=num_source[index]->num;
-      //std::cout<<num_from_file<<std::endl;
-      return true;
-    }   
-     else
-   {
-     num_source.erase(num_source.begin()+index);
-   }
- }
- return false;
-}
-bool success_tree::sort()  //每一千万行数据保存为一个文件大约一百M左右
-{
-  char out_file_name[20]={0};
-  std::ofstream out;
-
-  long max,count=0; 
-  int file_index=0;
-    
-   while( take()  )
-  { // std::cout<<ques.top()<<"\n";
-       if(0==count)
-    {
- snprintf(out_file_name, sizeof(out_file_name)-1,"%s%d%s","data/result",file_index++,".txt");   
-      out.open(out_file_name);
-      max=ques.top();
-      ques.pop(); 	
-      ques.push(num_from_file);
-      out<<max<<"\n";
-    }
-     else
-    {
-      max=ques.top();
-      ques.pop(); 	
-      ques.push(num_from_file);
-      out<<max<<"\n";
-      //std::cout<<max<<"\n";
-     } 
-     if (10000000==count)
-    {
-      out.close();
-      count=-1;
-    } 
-   count++;
-    
-  } 
-while(!ques.empty())
- {
-   out<<ques.top()->num_in_file<<"\n";
-   ques.pop();
- }
-out.close();
-}
-*/
-
-
 
 

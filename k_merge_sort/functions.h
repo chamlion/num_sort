@@ -6,12 +6,13 @@
 #include<random>
 #include<fstream>
 #include <dirent.h>
+#include<string>
 #define MAX_PATH 256
 
 namespace num
 {
 bool GetPathHere(std::string& path_here);
-void get_all_file_name(std::vector<std::string>& vec);
+void get_all_file_name(std::vector<std::string>& vec,std::string file);
 /*
 noncopyable源码来源于boost库，核心思想：使基类的拷贝赋值构造函数private。
 他的派生类是没有访问权限的。也就无法通过拷贝以及赋值来构造新对象。
