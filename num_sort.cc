@@ -7,17 +7,17 @@ path_read_(path_read),path_write_(path_write)
 void num::num_sort::init()
 {
 int size=sizeof(long); 
-std::ofstream out("sort.txt");
-        fd = open("out.txt", O_RDONLY); //打开/etc/passwd 
-        fstat(fd, &sb); // 取得文件大小 
+    fd = open(path_read_.c_str(), O_RDONLY); // 
+    fstat(fd,&sb);//获得文件大小
         start =static_cast<char *> ( mmap(NULL, sb.st_size, PROT_READ, MAP_PRIVATE, fd, 0));
         if(start == MAP_FAILED) // 判断是否映射成功 
           printf("MAP failed \n");
-   else
-        printf("MAP succes\n");
+   //																																																																																																																																																	else
+        //printf("MAP succes\n");
 }
 void num::num_sort::sort_()
 {   
+  std::cout<<path_write_<<std::endl;
       std::string str;
        long num;
      std::stringstream ss;
