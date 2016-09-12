@@ -29,41 +29,23 @@ mail    chamlionchina@gmail.com
 
 文件结构 ：
 ``` c++
-
 |
-
 |-----build.sh 
-
 |-----CmakeLists.txt
-
 |-----README.md
-
 |-----num_base
-
 |      |-----CmakeLists.txt
-
 |      |-----bolcking_task_queue.h      实现无锁队列
-
 |      |-----fucntions{.cc,.h}          包含得到当前文件路径、得到某个文件夹所有文件名、程序运行时间计时、noncopyable类 
-
 |      |-----num_sort{.cc,.h}           单个文件排序
-
 |      |-----success_tree{.cc,.h}       将排序好的文件中的数据进行多路归并排序
-
 |      |-----thread_poll{.cc,.h}        线程池 可用在对多个单文件的排序
-
 |     
-
 |-----src
-
 |      |-----CmakeLists.txt
-
 |      |-----bolcking_task_queue_test.cc   
-
 |      |-----num_sort_test.cc
-
 |      |-----success_tree_test.cc
-
 |      |-----thread_poll_test.cc
 ``` 
 
