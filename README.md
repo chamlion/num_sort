@@ -1,5 +1,6 @@
 # num_sort
-author chamlion  mail:chamlionchina@gmail.com
+author  chamlion 
+mail    chamlionchina@gmail.com
 看了陈硕老师在知乎上的一篇回答，why dont i give it a try!
 
 要求如下:
