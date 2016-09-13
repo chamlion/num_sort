@@ -2,6 +2,7 @@
 ``` c++
 	author  chamlion 
 	mail    chamlionchina@gmail.com
+	2016.9.13
 ***********************************项目出处****************************************************************************
 	看了陈硕老师在知乎上的一篇回答，why dont i give it a try!
 	要求如下:
@@ -32,15 +33,24 @@
 |      |-----num_sort{.cc,.h}           单个文件排序
 |      |-----success_tree{.cc,.h}       将排序好的文件中的数据进行多路归并排序
 |      |-----thread_poll{.cc,.h}        线程池 可用在对多个单文件的排序
-|     
-|-----src
+|-----num_net
+|      |-----CmakeLists.txt
+|      |-----epoll_server{.cc,.h}       服务器基础类 包含对client端连接断开处理，以及对client端发送数据的处理 以及排序结果的写入
+|      |-----sock_client{.cc,.h}        客户端基础类 包含和server端的基础通信，以及按照server端的指令发送相应的数据
+|-----src                               测试文件
 |      |-----CmakeLists.txt
 |      |-----bolcking_task_queue_test.cc   
 |      |-----num_sort_test.cc
 |      |-----success_tree_test.cc
 |      |-----thread_poll_test.cc
-	使用方法       在build.sh 目录下 执行 sudo ./build.sh  则会生成相应的静态库 及测试文件	
-	静态库的使用   比如欲使用functions.h 则应包含头文件<num/base/functions.h>
+|      |-----sock_client_test.cc
+|      |-----epoll_server_test.cc
+开发环境 ：
+系统      ubuntu 15.04
+编译器    g++ 5.2.1
+调试器    gdb  7.10
+编译方法       在build.sh 目录下 执行 sudo ./build.sh  则会生成相应的静态库 及测试文件	
+静态库的使用   比如欲使用functions.h 则应包含头文件<num/base/functions.h>
 ``` 
 	
 
