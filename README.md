@@ -46,9 +46,9 @@
 |      |-----sock_client_test.cc
 |      |-----epoll_server_test.cc
 开发环境 ：
-系统      ubuntu 15.04
-编译器    g++ 5.2.1
-调试器    gdb  7.10
+系统           ubuntu 15.04
+编译器         g++ 5.2.1
+调试器         gdb  7.10
 编译方法       在build.sh 目录下 执行 sudo ./build.sh  则会生成相应的静态库 及测试文件	
 静态库的使用   比如欲使用functions.h 则应包含头文件<num/base/functions.h>
 ``` 
