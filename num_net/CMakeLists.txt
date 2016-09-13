@@ -4,7 +4,18 @@ cmake_minimum_required (VERSION 2.8)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 # 项目信息
-project (net)
-add_library (epoll_server  epoll_server.cc  epoll_server.h)
-add_executable (main main.cc)
-target_link_libraries(main epoll_server)
+set(net_SRCS
+  epoll_server.cc 
+  sock_client.cc
+  )
+
+add_library(num_net ${net_SRCS})
+#target_link_libraries(num_base pthread rt)
+
+install(TARGETS num_net DESTINATION lib)
+set(HEADERS
+  epoll_server.h
+  sock_client.h
+  )
+install(FILES ${HEADERS} DESTINATION include/num/net)
+
