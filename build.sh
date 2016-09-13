@@ -9,7 +9,9 @@ mkdir -p build \
   && cd build  \
   && cmake ..
 cd num_base \
-&&make install 
+&& make install 
+cd ../num_net \
+&& make install
 cd .. \
 && make
 cd .. \
