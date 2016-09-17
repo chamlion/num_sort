@@ -15,7 +15,7 @@ void take()
 {
   for (int i=0;i<10;i++)
   {
-//  std::cout<<"take  "<<que->take()<<std::endl;
+    std::cout<<"take  "<<que->take()<<std::endl;
   }
 }
 int main()
