@@ -49,10 +49,17 @@ void num::epoll_server::loop()
 		{       num_connet++;
 			peerlen = sizeof(peeraddr);
 			while((connfd = ::accept4(listenfd, (struct sockaddr*)&peeraddr,&peerlen, SOCK_NONBLOCK | SOCK_CLOEXEC))>0);
-{
-			if (connfd == -1)
-			{
-				if (errno == EMFILE) //文件描述符用完
+                  {
+		//std::cout<<"ip="<<inet_ntoa(peeraddr.sin_addr)<<" port="<<ntohs(peeraddr.sin_port)<<std::endl;
+		clients.push_back(connfd);
+		event.data.fd = connfd;
+		event.events = EPOLLIN/* | EPOLLET*/;
+		write(connfd, buf_write, strlen(buf_write));
+		epoll_ctl(epollfd, EPOLL_CTL_ADD, connfd, &event);
+		}
+                if (connfd == -1)
+                    {
+		       if (errno == EMFILE) //文件描述符用完
 				{
 				close(idlefd);
 				idlefd = accept(listenfd, NULL, NULL);
@@ -62,15 +69,8 @@ void num::epoll_server::loop()
 				}
 			else
 			ERR_EXIT("accept4");
-			}
-		//std::cout<<"ip="<<inet_ntoa(peeraddr.sin_addr)<<" port="<<ntohs(peeraddr.sin_port)<<std::endl;
-		clients.push_back(connfd);
-		event.data.fd = connfd;
-		event.events = EPOLLIN/* | EPOLLET*/;
-		write(connfd, buf_write, strlen(buf_write));
-		epoll_ctl(epollfd, EPOLL_CTL_ADD, connfd, &event);
-		}
-}
+		     }                 
+                 }
 	else if (events[i].events & EPOLLIN)	
 	{
 	connfd = events[i].data.fd;
