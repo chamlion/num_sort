@@ -48,7 +48,8 @@ void num::epoll_server::loop()
 		if (events[i].data.fd == listenfd)
 		{       num_connet++;
 			peerlen = sizeof(peeraddr);
-			connfd = ::accept4(listenfd, (struct sockaddr*)&peeraddr,&peerlen, SOCK_NONBLOCK | SOCK_CLOEXEC);
+			while((connfd = ::accept4(listenfd, (struct sockaddr*)&peeraddr,&peerlen, SOCK_NONBLOCK | SOCK_CLOEXEC))>0);
+{
 			if (connfd == -1)
 			{
 				if (errno == EMFILE) //文件描述符用完
@@ -69,6 +70,7 @@ void num::epoll_server::loop()
 		write(connfd, buf_write, strlen(buf_write));
 		epoll_ctl(epollfd, EPOLL_CTL_ADD, connfd, &event);
 		}
+}
 	else if (events[i].events & EPOLLIN)	
 	{
 	connfd = events[i].data.fd;
@@ -143,4 +145,3 @@ void num::epoll_server::write_to_file(long num_temp)
 {
   out<<num_temp<<"\n";
 }
-
